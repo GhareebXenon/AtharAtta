@@ -42,7 +42,7 @@ public class PanelAnimation : MonoBehaviour
         panel
             .DOPunchScale(Vector3.one * punchScale, punchDuration, 8, 0.8f)
             .SetEase(Ease.OutQuad);
-
+        panel.DOShakeAnchorPos(0.2f, 5f, 10);
         // ---- Glow In ----
         outline.effectDistance = new Vector2(glowSize, glowSize);
 
@@ -51,11 +51,13 @@ public class PanelAnimation : MonoBehaviour
             .SetEase(Ease.OutQuad)
             .OnComplete(() =>
             {
+                 
                 // ---- Glow Out ----
                 outline
                     .DOFade(0f, glowDuration)
                     .SetEase(Ease.InQuad);
             });
+        
     }
 }
 

@@ -8,7 +8,7 @@ public class CarousalController : MonoBehaviour
 {
     public RectTransform cardParent;   // UI Container (Horizontal group or manual layout)
     public GameObject cardPrefab;      // Prefab with UI elements
-
+    public GameObject exitButton;
     public float slideSpeed = 5f;
     public float idleTimeBeforeLoop = 30f;
     public float cardWidth = 1920f;    // Width of each card in 2D UI
@@ -141,5 +141,7 @@ public class CarousalController : MonoBehaviour
         {
             card.GetComponent<CardController>().SetEditMode(editMode);
         }
+        
+        exitButton.SetActive(editMode);
     }
 }

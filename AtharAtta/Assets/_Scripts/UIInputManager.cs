@@ -22,4 +22,9 @@ public class UIInputManager : MonoBehaviour
         nameInput.text = "";
         messageInput.text = "";
     }
+   public void ExitApp()
+    {
+        Application.Quit();
+        UnityEditor.EditorApplication.isPaused = true;
+    }
 }
