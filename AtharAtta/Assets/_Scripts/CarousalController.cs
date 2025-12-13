@@ -17,7 +17,7 @@ public class CarousalController : MonoBehaviour
     private int currentIndex = 0;
     private float idleTimer = 0f;
     private bool isLooping = false;
-
+    private bool editMode = false;
     void Update()
     {
         idleTimer += Time.deltaTime;
@@ -31,6 +31,7 @@ public class CarousalController : MonoBehaviour
     public void AddNewCard(string name, string message)
     {
         GameObject newCard = Instantiate(cardPrefab, cardParent);
+        newCard.GetComponent<CardController>().Init(this);
 
         RectTransform rt = newCard.GetComponent<RectTransform>();
 
@@ -104,6 +105,41 @@ public class CarousalController : MonoBehaviour
             t += Time.deltaTime * slideSpeed;
             cardParent.anchoredPosition = Vector2.Lerp(startPos, targetPos, t);
             yield return null;
+        }
+    }
+    public void RemoveCard(GameObject card)
+    {
+        int removedIndex = cards.IndexOf(card);
+
+        if (removedIndex < 0) return;
+
+        cards.Remove(card);
+        Destroy(card);
+
+        // Reposition remaining cards
+        for (int i = 0; i < cards.Count; i++)
+        {
+            RectTransform rt = cards[i].GetComponent<RectTransform>();
+            float targetX = i * cardWidth;
+
+            rt.DOAnchorPosX(targetX, 0.3f).SetEase(Ease.OutQuad);
+        }
+
+        // Resize parent
+        cardParent.sizeDelta = new Vector2(cards.Count * cardWidth, cardParent.sizeDelta.y);
+
+        // Clamp index
+        currentIndex = Mathf.Clamp(currentIndex, 0, cards.Count - 1);
+        MoveToCardInstant(currentIndex);
+    }
+
+    public void ToggleEditMode()
+    {
+        editMode = !editMode;
+
+        foreach (GameObject card in cards)
+        {
+            card.GetComponent<CardController>().SetEditMode(editMode);
         }
     }
 }

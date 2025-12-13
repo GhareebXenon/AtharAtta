@@ -12,6 +12,7 @@ public class MultiDisplayActivator : MonoBehaviour
             Display.displays[i].Activate();
             Debug.Log("Activated display: " + i);
         }
+
     }
 }
 
