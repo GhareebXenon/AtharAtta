@@ -8,7 +8,7 @@ public class UIInputManager : MonoBehaviour
     public RTLTMP_InputField messageInput;
 
     public CarousalController carousel;
-
+    public PanelAnimation panelJuice;
     public void SubmitCard()
     {
         string n = nameInput.text.Trim();
@@ -16,7 +16,7 @@ public class UIInputManager : MonoBehaviour
 
         if (string.IsNullOrEmpty(n) || string.IsNullOrEmpty(m))
             return;
-
+        panelJuice.PlaySubmitFeedback();
         carousel.AddNewCard(n, m);
 
         nameInput.text = "";
