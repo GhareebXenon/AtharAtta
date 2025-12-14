@@ -6,7 +6,7 @@ public class MultiDisplayActivator : MonoBehaviour
     {
         Debug.Log("Displays connected: " + Display.displays.Length);
 
-        // Display 0 = main (already active)
+        
         for (int i = 1; i < Display.displays.Length; i++)
         {
             Display.displays[i].Activate();

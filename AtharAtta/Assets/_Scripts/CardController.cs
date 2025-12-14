@@ -7,7 +7,7 @@ public class CardController : MonoBehaviour
 {
     public RTLTextMeshPro nameText;
     public RTLTextMeshPro messageText;
-    public GameObject deleteButton;   //  button
+    public GameObject deleteButton;   
     private CarousalController carousel;
 
     void Awake()
@@ -31,7 +31,7 @@ public class CardController : MonoBehaviour
 
     public void DeleteSelf()
     {
-        // Small game-style animation before deletion
+        
         transform.DOScale(Vector3.zero, 0.25f)
             .SetEase(Ease.InBack)
             .OnComplete(() =>
