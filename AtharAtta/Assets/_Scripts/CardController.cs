@@ -1,42 +1,49 @@
 using DG.Tweening;
 using RTLTMPro;
-using TMPro;
 using UnityEngine;
 
 public class CardController : MonoBehaviour
 {
     public RTLTextMeshPro nameText;
     public RTLTextMeshPro messageText;
-    public GameObject deleteButton;   
-    private CarousalController carousel;
+    public GameObject deleteButton;
+
+    private StickyCardsController stickyController;
 
     void Awake()
     {
-        deleteButton.SetActive(false);
+        if (deleteButton != null)
+            deleteButton.SetActive(false);
     }
-    public void Setup(string personName, string message)
+
+    public void Setup(string name, string message)
     {
-        nameText.text = personName;
-        messageText.text = message;
+        if (nameText != null)
+            nameText.text = name;
+
+        if (messageText != null)
+            messageText.text = message;
     }
-    public void Init(CarousalController owner)
+
+    public void Init(StickyCardsController owner)
     {
-        carousel = owner;
+        stickyController = owner;
     }
 
     public void SetEditMode(bool enabled)
     {
-        deleteButton.SetActive(enabled);
+        if (deleteButton != null)
+            deleteButton.SetActive(enabled);
     }
 
     public void DeleteSelf()
     {
-        
         transform.DOScale(Vector3.zero, 0.25f)
             .SetEase(Ease.InBack)
             .OnComplete(() =>
             {
-                carousel.RemoveCard(gameObject);
+                if (stickyController != null)
+                    stickyController.RemoveCard(gameObject);
             });
     }
 }

@@ -43,8 +43,8 @@ public class CarousalController : MonoBehaviour
         GameObject newCard = Instantiate(cardPrefab, cardParent);
         RectTransform rt = newCard.GetComponent<RectTransform>();
 
-        newCard.GetComponent<CardController>().Init(this);
-        newCard.GetComponent<CardController>().Setup(name, message);
+        //newCard.GetComponent<CardController>().Init(this);
+        //newCard.GetComponent<CardController>().Setup(name, message);
 
         // Start below screen
         rt.anchoredPosition = new Vector2(0, -300);
