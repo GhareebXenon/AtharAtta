@@ -25,6 +25,6 @@ public class UIInputManager : MonoBehaviour
    public void ExitApp()
     {
         Application.Quit();
-        UnityEditor.EditorApplication.isPaused = true;
+        
     }
 }
